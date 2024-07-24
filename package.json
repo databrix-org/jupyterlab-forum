@@ -1,6 +1,6 @@
 {
     "name": "jupyterlab_forum",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "A JupyterLab extension for building a forum ui in jupyterlab",
     "keywords": [
         "jupyter",
