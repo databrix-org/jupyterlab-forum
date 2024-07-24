@@ -7,9 +7,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/databrix-org/jupyterlab-forum.git",
+    "homepage": "https://github.com/databrix-org/jupyterlab-forum",
     "bugs": {
-        "url": "https://github.com/databrix-org/jupyterlab-forum.git/issues"
+        "url": "https://github.com/databrix-org/jupyterlab-forum/issues"
     },
     "license": "BSD-3-Clause",
     "author": {
@@ -26,7 +26,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/databrix-org/jupyterlab-forum.git.git"
+        "url": "https://github.com/databrix-org/jupyterlab-forum.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
