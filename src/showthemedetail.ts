@@ -29,17 +29,17 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
         widget.node.innerHTML = `
           <div class="topic">
             <div class="topic-header">
-              <h2 class="topic-title">${themeDetail.title}</h2>
+              <h2 class="topic-title">${themeDetail.Title}</h2>
               <div class="topic-meta">
-                <span class="topic-author">by ${themeDetail.author}</span>
-                <span class="topic-date">${new Date(themeDetail.creationTime).toLocaleDateString()}</span>
+                <span class="topic-author">by ${themeDetail.Author}</span>
+                <span class="topic-date">${new Date(themeDetail.CreationTime).toLocaleDateString()}</span>
               </div>
             </div>
 
             <div class="topic-body">
-              <div class="topic-content">${themeDetail.description}</div>
+              <div class="topic-content">${themeDetail.Description}</div>
               <div class="topic-stats">
-                <span>${themeDetail.replies.length} Antworten</span> •
+                <span>${themeDetail.Replies.length} Antworten</span> •
               </div>
             </div>
 
@@ -53,15 +53,15 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
         `;
         // Insert replies into replies-container
         const repliesContainer = widget.node.querySelector('.replies-container');
-        themeDetail.replies.forEach((reply: any) => {
+        themeDetail.Replies.forEach((reply: any) => {
             const replyDiv = document.createElement('div');
             replyDiv.className = 'reply';
             replyDiv.innerHTML = `
               <div class="reply-header">
-                <span class="reply-author">${reply.author}</span> •
-                <span class="reply-date">${new Date(reply.replyTime).toLocaleDateString()}</span>
+                <span class="reply-author">${reply.Author}</span> •
+                <span class="reply-date">${new Date(reply.CreationTime).toLocaleDateString()}</span>
               </div>
-              <div class="reply-content">${reply.content}</div>
+              <div class="reply-content">${reply.Content}</div>
             `;
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
@@ -107,10 +107,10 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
             replyDiv.className = 'reply';
             replyDiv.innerHTML = `
               <div class="reply-header">
-                <span class="reply-author">${reply.author}</span> •
-                <span class="reply-date">${new Date(reply.replyTime).toLocaleDateString()}</span>
+                <span class="reply-author">${reply.Author}</span> •
+                <span class="reply-date">${new Date(reply.CreationTime).toLocaleDateString()}</span>
               </div>
-              <div class="reply-content">${reply.content}</div>
+              <div class="reply-content">${reply.Content}</div>
             `;
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });

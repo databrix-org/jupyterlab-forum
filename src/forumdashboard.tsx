@@ -87,7 +87,7 @@ export class ForumDashboardWidget extends Widget {
                     <div class="subforum-row">
                         <div class="subforum-description subforum-column">
                             <h4><a href="#" class="description-link" data-description-id="${theme.ThemeID}">${theme.Title}</a></h4>
-                            <p>Created by ${theme.Author} on ${new Date(theme.creationTime).toLocaleDateString()}</p>
+                            <p>Created by ${theme.Author} on ${new Date(theme.CreationTime).toLocaleDateString()}</p>
                             <p>Status: ${theme.Status}</p>
                         </div>
                         <div class="subforum-info subforum-column">
