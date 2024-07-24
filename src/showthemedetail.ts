@@ -77,17 +77,17 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
         widget.node.innerHTML = `
           <div class="topic">
             <div class="topic-header">
-              <h2 class="topic-title">${exampleTheme.title}</h2>
+              <h2 class="topic-title">${exampleTheme.Title}</h2>
               <div class="topic-meta">
-                <span class="topic-author">by ${exampleTheme.author}</span>
-                <span class="topic-date">${new Date(exampleTheme.creationTime).toLocaleDateString()}</span>
+                <span class="topic-author">by ${exampleTheme.Author}</span>
+                <span class="topic-date">${new Date(exampleTheme.CreationTime).toLocaleDateString()}</span>
               </div>
             </div>
 
             <div class="topic-body">
-              <div class="topic-content">${exampleTheme.description}</div>
+              <div class="topic-content">${exampleTheme.Description}</div>
               <div class="topic-stats">
-                <span>${exampleTheme.replies.length} Antworten</span> •
+                <span>${exampleTheme.Replies.length} Antworten</span> •
               </div>
             </div>
 
@@ -102,7 +102,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
 
         // Insert replies into replies-container
         const repliesContainer = widget.node.querySelector('.replies-container');
-        exampleTheme.replies.forEach((reply: any) => {
+        exampleTheme.Replies.forEach((reply: any) => {
             const replyDiv = document.createElement('div');
             replyDiv.className = 'reply';
             replyDiv.innerHTML = `
