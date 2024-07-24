@@ -195,9 +195,6 @@ p, li, a {
   color: #666;
 }
 
-.topic-body {
-  margin-bottom: 20px;
-}
 
 .topic-replies h3 {
   margin-top: 20px;
@@ -260,14 +257,24 @@ p, li, a {
   color: #666;
 }
 
+.topic-body {
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light gray border */
+    padding: 20px;           /* Add some padding around the content */
+    margin-bottom: 20px;     /* Space between topics */
+    border-radius: 5px;       /* Slightly rounded corners */
+}
+
+.topic-content {
+    font-size: 16px;
+    line-height: 1.6;  /* Improve readability with line spacing */
+    margin-bottom: 15px; /* Space between content and stats */
+}
+
 .topic-stats {
   margin-top: 10px; /* Add space between content and stats */
   font-size: 0.85rem;
   color: #888; /* Lighter gray for stats */
-}
-
-.topic-stats span {
-  margin-right: 15px;
 }
 
 .topic-replies {
