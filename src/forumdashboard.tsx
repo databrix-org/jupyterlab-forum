@@ -73,7 +73,7 @@ export class ForumDashboardWidget extends Widget {
         ];
 
         try {
-            const response = await fetch('https://1985609f-7839-4819-8840-2d38548e4ea5.ma.bw-cloud-instance.org/forum/');
+            const response = await fetch('https://1985609f-7839-4819-8840-2d38548e4ea5.ma.bw-cloud-instance.org/jupyterhub/forum/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
