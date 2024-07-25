@@ -19,9 +19,13 @@ const plugin: JupyterFrontEndPlugin<void> = {
 function activate(app: JupyterFrontEnd, palette: ICommandPalette) {
   console.log('JupyterLab extension forum is activated!');
 
+
+  //get current User
+  const user = app.serviceManager.user;
+
   // Define a widget creator function
   const newWidget = () => {
-    const content = new ForumDashboardWidget();
+    const content = new ForumDashboardWidget(user.identity ? user.identity.name : 'Unknown User');
     const widget = new MainAreaWidget({content});
     widget.id = 'forum-jupyterlab';
     widget.title.label = 'Forum';
@@ -45,7 +49,7 @@ function activate(app: JupyterFrontEnd, palette: ICommandPalette) {
         // Attach the widget to the main work area if it's not there
         app.shell.add(widget, 'main');
       }
-      
+
       // Activate the widget
       app.shell.activateById(widget.id);
     }
@@ -56,4 +60,3 @@ function activate(app: JupyterFrontEnd, palette: ICommandPalette) {
 }
 
 export default plugin;
-

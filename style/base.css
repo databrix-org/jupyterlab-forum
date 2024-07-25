@@ -314,25 +314,48 @@ p, li, a {
 /* Topic Detail Styling */
 
 .tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Add padding for spacing */
+    background-color: #f0f0f0; /* Subtle background color */
+    border-bottom: 1px solid #ddd; /* Bottom border for separation */
+}
+
+.tab-group {
+    display: flex;
 }
 
 .tab {
-  padding: 10px 20px;
-  background-color: #eee;
-  border: none;
-  cursor: pointer;
-  margin: 0 5px;
-  border-radius: 5px;
+    padding: 8px 15px;
+    margin-right: 10px; /* Add space between tabs */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
 .tab:hover {
-  background-color: #ddd;
+    background-color: #f5f5f5; /* Slightly darker on hover */
 }
 
-.tab.active { /* Style the active tab differently */
-  background-color: #5b81ba;
-  color: white;
+.tab.active { /* Style for active tab */
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border-color: #007bff;
+}
+
+.create-theme-button {
+    padding: 8px 15px;
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.create-theme-button:hover {
+    background-color: #0056b3; /* Slightly darker blue on hover */
 }

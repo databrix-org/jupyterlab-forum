@@ -15,7 +15,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
 
     try {
         // Make a POST request to retrieve the theme details
-        const response = await fetch('https://1985609f-7839-4819-8840-2d38548e4ea5.ma.bw-cloud-instance.org/jupyterhub/services/forum/', {
+        const response = await fetch('jupyterhub/services/forum/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

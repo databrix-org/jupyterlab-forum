@@ -1,5 +1,6 @@
 import { Widget } from '@lumino/widgets';
 import { ShowThemeDetail } from './showthemedetail';
+import { handleCreateThemeClick } from './CreateTheme';
 
 
 export class ForumDashboardWidget extends Widget {
@@ -7,7 +8,7 @@ export class ForumDashboardWidget extends Widget {
     private originalHTML: string; // Declare the property
     private activeTab: string = 'all'; // Track the active tab
 
-    constructor() {
+    constructor(private username: string) {
         super();
 
         this.originalHTML = `
@@ -23,6 +24,8 @@ export class ForumDashboardWidget extends Widget {
                 <button class="tab" data-tab="open">Open</button>
                 <button class="tab" data-tab="closed">Closed</button>
               </div>
+              <button class="create-theme-button" id="createThemeButton">Create Theme</button>
+            </div>
               <div class="subforum">
                 <div class="subforum-title">
                   <h1>General Information</h1>
@@ -34,9 +37,13 @@ export class ForumDashboardWidget extends Widget {
         this.node.innerHTML = this.originalHTML; // Set initial HTML
         this.fetchAndDisplayThemes();
 
-        // Event listener for "Description Title" link
+        // Event listener
         this.node.addEventListener('click', (event) => {
             const target = event.target as HTMLElement; // Get the clicked element
+
+            if (target.classList.contains('create-theme-button')) {
+              handleCreateThemeClick(this, this.username);
+            }
 
             if (target.classList.contains('tab')) {
               this.activeTab = target.dataset.tab ?? 'all'; // Default to 'all' if undefined
@@ -73,7 +80,7 @@ export class ForumDashboardWidget extends Widget {
         ];
 
         try {
-            const response = await fetch('https://1985609f-7839-4819-8840-2d38548e4ea5.ma.bw-cloud-instance.org/jupyterhub/services/forum/');
+            const response = await fetch('jupyterhub/services/forum/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
