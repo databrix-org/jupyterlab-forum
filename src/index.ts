@@ -39,9 +39,9 @@ function activate(app: JupyterFrontEnd, palette: ICommandPalette) {
     jupyterhubBaseUrl = `${fullUrl}${path.split('/user/')[0]}`;
   } else {
     // If '/user/' is not present, use the baseUrl directly
-    jupyterhubBaseUrl = `${fullUrl}${path}`;
+    jupyterhubBaseUrl = `${fullUrl}`;
   }
-  const forumEndpointUrl = `${jupyterhubBaseUrl}services/forum/`;
+  const forumEndpointUrl = `${jupyterhubBaseUrl}/services/forum/`;
   console.log('JupyterHub Base URL:', forumEndpointUrl);
 
   // Define a widget creator function

@@ -1,6 +1,7 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
+Bug at retrieving URL Fixed.
 
 ## 0.1.8
 
