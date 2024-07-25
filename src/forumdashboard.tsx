@@ -8,7 +8,7 @@ export class ForumDashboardWidget extends Widget {
     private originalHTML: string; // Declare the property
     private activeTab: string = 'all'; // Track the active tab
 
-    constructor(private username: string) {
+    constructor(private username: string, private forumEndpointUrl: string) {
         super();
 
         this.originalHTML = `
@@ -42,7 +42,7 @@ export class ForumDashboardWidget extends Widget {
             const target = event.target as HTMLElement; // Get the clicked element
 
             if (target.classList.contains('create-theme-button')) {
-              handleCreateThemeClick(this, this.username);
+              handleCreateThemeClick(this, this.username, this.forumEndpointUrl);
             }
 
             if (target.classList.contains('tab')) {
@@ -53,7 +53,7 @@ export class ForumDashboardWidget extends Widget {
             if (target.classList.contains('description-link')) { // Check if it's the correct link
                 const ThemeID = target.getAttribute('data-description-id');
                 event.preventDefault(); // Prevent default link behavior
-                ShowThemeDetail(this, ThemeID);
+                ShowThemeDetail(this, ThemeID, this.forumEndpointUrl);
             }
         });
     }
@@ -80,7 +80,7 @@ export class ForumDashboardWidget extends Widget {
         ];
 
         try {
-            const response = await fetch('services/forum/');
+            const response = await fetch(this.forumEndpointUrl);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

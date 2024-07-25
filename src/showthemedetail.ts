@@ -1,4 +1,4 @@
-export async function ShowThemeDetail(widget: any, ThemeID: any) {
+export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string) {
 
 
     // Example theme data
@@ -15,7 +15,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any) {
 
     try {
         // Make a POST request to retrieve the theme details
-        const response = await fetch('services/forum/', {
+        const response = await fetch(forumEndpointUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

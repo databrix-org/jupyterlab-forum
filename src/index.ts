@@ -6,6 +6,7 @@ import {
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
 
 import {ForumDashboardWidget} from './forumdashboard';
+import { PageConfig } from '@jupyterlab/coreutils';
 
 
 const plugin: JupyterFrontEndPlugin<void> = {
@@ -22,10 +23,30 @@ function activate(app: JupyterFrontEnd, palette: ICommandPalette) {
 
   //get current User
   const user = app.serviceManager.user;
+  const baseUrl = PageConfig.getBaseUrl()  // e.g., /jupyterhub/user/xxx/
+  // Use URL object to extract the path
+  const urlObj = new URL(baseUrl);
+  const path = urlObj.pathname;
+
+
+  const fullUrl = window.location.origin;   // e.g., https://example.org
+
+  let jupyterhubBaseUrl: string;
+
+  // Check if the baseUrl contains '/user/'
+  if (path.includes('/user/')) {
+    // Extract everything before '/user/'
+    jupyterhubBaseUrl = `${fullUrl}${path.split('/user/')[0]}`;
+  } else {
+    // If '/user/' is not present, use the baseUrl directly
+    jupyterhubBaseUrl = `${fullUrl}${path}`;
+  }
+  const forumEndpointUrl = `${jupyterhubBaseUrl}services/forum/`;
+  console.log('JupyterHub Base URL:', forumEndpointUrl);
 
   // Define a widget creator function
   const newWidget = () => {
-    const content = new ForumDashboardWidget(user.identity ? user.identity.name : 'Unknown User');
+    const content = new ForumDashboardWidget(user.identity ? user.identity.name : 'Unknown User', forumEndpointUrl);
     const widget = new MainAreaWidget({content});
     widget.id = 'forum-jupyterlab';
     widget.title.label = 'Forum';
