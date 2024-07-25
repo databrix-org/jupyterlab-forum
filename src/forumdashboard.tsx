@@ -80,7 +80,7 @@ export class ForumDashboardWidget extends Widget {
         ];
 
         try {
-            const response = await fetch('jupyterhub/services/forum/');
+            const response = await fetch('services/forum/');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

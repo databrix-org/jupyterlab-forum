@@ -32,7 +32,7 @@ export async function handleCreateThemeClick(widget: any, username: string) {
 
           try {
             // Send theme data to the server (e.g., using fetch)
-            const response = await fetch('jupyterhub/services/forum/', {
+            const response = await fetch('services/forum/', {
               method: 'POST',
               body: JSON.stringify(newTheme),
               headers: { 'Content-Type': 'application/json' },
