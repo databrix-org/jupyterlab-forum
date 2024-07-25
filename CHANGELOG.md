@@ -4,7 +4,7 @@
 
 ## 0.1.7
 
-No merged PRs
+New Home URL Retrieve Method added
 
 <!-- <END NEW CHANGELOG ENTRY> -->
 
