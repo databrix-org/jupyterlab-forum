@@ -2,11 +2,15 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 0.1.8
+
+No merged PRs
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 0.1.7
 
 New Home URL Retrieve Method added
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 0.1.6
 
