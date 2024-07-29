@@ -1,14 +1,18 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
-ADD Delete and toggle features
 
+## 0.1.11
+
+No merged PRs
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+ADD Delete and toggle features
 
 ## 0.1.10
 
 No merged PRs
 
-<!-- <END NEW CHANGELOG ENTRY> -->
 Add Reply feature
 
 ## 0.1.9
