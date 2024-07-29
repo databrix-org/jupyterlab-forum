@@ -1,13 +1,18 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
+
+## 0.1.10
+
+No merged PRs
+
+<!-- <END NEW CHANGELOG ENTRY> -->
 Add Reply feature
 
 ## 0.1.9
 
 No merged PRs
 
-<!-- <END NEW CHANGELOG ENTRY> -->
 Bug at retrieving URL Fixed.
 
 ## 0.1.8
