@@ -18,7 +18,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
 
     try {
 
-        const grouplist = await fetchGroupData(username, forumEndpointUrl)
+        const grouplist = await fetchGroupData( forumEndpointUrl)
         // Make a POST request to retrieve the theme details
         const response = await fetch(forumEndpointUrl, {
             method: 'POST',

@@ -24,9 +24,9 @@ export class ForumDashboardWidget extends Widget {
             </header>
             <div class="container">
               <div class="tabs">
-                <button class="tab" data-tab="all">All</button>
-                <button class="tab" data-tab="open">Open</button>
-                <button class="tab" data-tab="closed">Closed</button>
+                <button class="tab" data-tab="All">All</button>
+                <button class="tab" data-tab="Open">Open</button>
+                <button class="tab" data-tab="Closed">Closed</button>
               </div>
               <button class="create-theme-button" id="createThemeButton">Create Theme</button>
             </div>
@@ -51,7 +51,7 @@ export class ForumDashboardWidget extends Widget {
             }
 
             if (target.classList.contains('tab')) {
-              this.activeTab = target.dataset.tab ?? 'Open'; // Default to 'all' if undefined
+              this.activeTab = target.dataset.tab ?? 'Open'; // Default to 'open' if undefined
               this.currentPage = 1
               this.updateTabDisplay();
             }
@@ -147,7 +147,7 @@ export class ForumDashboardWidget extends Widget {
     private updateTabDisplay() {
       // Filter the themes based on their status
       this.showThemes = this.allThemes.filter(theme => {
-          return this.activeTab === 'all' || theme.Status === this.activeTab;
+          return this.activeTab === 'All' || theme.Status === this.activeTab;
       });
 
       this.displayCurrentPageThemes();
