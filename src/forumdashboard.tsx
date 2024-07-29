@@ -10,10 +10,11 @@ export class ForumDashboardWidget extends Widget {
     private currentPage: number = 1; // Track the current page
     private themesPerPage: number = 5; // Maximum number of themes per page
     private allThemes: any[] = []; // Store all themes
+    private showThemes: any[] = []; // Store all themes
 
     constructor(private username: string, private forumEndpointUrl: string) {
         super();
-
+        this.addClass('forumWidget');
         this.originalHTML = `
             <header>
                 <!--NavBar Section-->
@@ -50,7 +51,8 @@ export class ForumDashboardWidget extends Widget {
             }
 
             if (target.classList.contains('tab')) {
-              this.activeTab = target.dataset.tab ?? 'all'; // Default to 'all' if undefined
+              this.activeTab = target.dataset.tab ?? 'Open'; // Default to 'all' if undefined
+              this.currentPage = 1
               this.updateTabDisplay();
             }
 
@@ -85,7 +87,42 @@ export class ForumDashboardWidget extends Widget {
               Author: "User123",
               CreationTime: "2024-07-15T15:30:00",
               Status: "closed"
-            }
+            },
+            {
+              ThemeID: 3,
+              Title: "Example Theme 2",
+              Author: "User123",
+              CreationTime: "2024-07-15T15:30:00",
+              Status: "closed"
+            },
+            {
+              ThemeID: 4,
+              Title: "Example Theme 2",
+              Author: "User123",
+              CreationTime: "2024-07-15T15:30:00",
+              Status: "closed"
+            },
+            {
+              ThemeID: 5,
+              Title: "Example Theme 2",
+              Author: "User123",
+              CreationTime: "2024-07-15T15:30:00",
+              Status: "closed"
+            },
+            {
+              ThemeID: 6,
+              Title: "Example Theme 2",
+              Author: "User123",
+              CreationTime: "2024-07-15T15:30:00",
+              Status: "closed"
+            },
+            {
+              ThemeID: 2,
+              Title: "Example Theme 2",
+              Author: "User123",
+              CreationTime: "2024-07-15T15:30:00",
+              Status: "closed"
+            },
         ];
 
         try {
@@ -96,10 +133,11 @@ export class ForumDashboardWidget extends Widget {
 
             const data = await response.json();
             this.allThemes = data.themes;
-
+            this.showThemes = this.allThemes
         } catch (error) {
             console.error('Error fetching themes:', error);
             this.allThemes = exampleThemes;
+            this.showThemes = this.allThemes
         }
 
         this.displayCurrentPageThemes();
@@ -107,23 +145,13 @@ export class ForumDashboardWidget extends Widget {
     }
 
     private updateTabDisplay() {
-      const allThemes = [...this.node.querySelectorAll('.subforum-row')];
-
-      allThemes.forEach(theme => {
-        const themeElement = theme as HTMLElement;
-
-        // Ensure the element exists and has textContent before splitting
-        const lastChildParagraph = themeElement.querySelector('p:last-child');
-        const status = lastChildParagraph && lastChildParagraph.textContent
-                        ? lastChildParagraph.textContent.split(': ')[1] || ''
-                        : '';  // Default to empty string if not found
-
-        if (this.activeTab === 'all' || status === this.activeTab) {
-          themeElement.style.display = 'grid';
-        } else {
-          themeElement.style.display = 'none';
-        }
+      // Filter the themes based on their status
+      this.showThemes = this.allThemes.filter(theme => {
+          return this.activeTab === 'all' || theme.Status === this.activeTab;
       });
+
+      this.displayCurrentPageThemes();
+      this.updatePaginationControls();
     }
 
 
@@ -133,7 +161,7 @@ export class ForumDashboardWidget extends Widget {
 
         const start = (this.currentPage - 1) * this.themesPerPage;
         const end = start + this.themesPerPage;
-        const currentThemes = this.allThemes.slice(start, end);
+        const currentThemes = this.showThemes.slice(start, end);
 
         themesContainer.innerHTML = currentThemes.map((theme: any) => `
             <div class="subforum-row">

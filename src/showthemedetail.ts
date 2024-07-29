@@ -1,7 +1,7 @@
 import{handleReplyToTheme} from './replytheme';
+import{fetchGroupData} from './getgroupinfo';
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
-
 
     // Example theme data
     const exampleTheme = {
@@ -17,6 +17,8 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
     };
 
     try {
+
+        const grouplist = await fetchGroupData(username, forumEndpointUrl)
         // Make a POST request to retrieve the theme details
         const response = await fetch(forumEndpointUrl, {
             method: 'POST',
@@ -52,9 +54,9 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
 
             <button id="reply-to-theme" class="btn btn-primary">Reply</button>
             <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
-            ${(username === themeDetail.Author) ? `
+            ${(username === themeDetail.Author || grouplist.includes(username)) ? `
               <button id="delete-theme" class="btn btn-danger">Delete Theme</button>
-              ${(username === themeDetail.Author) ? `
+              ${(username === themeDetail.Author || grouplist.includes(username)) ? `
                 <button id="toggle-status" class="btn btn-secondary">${themeDetail.Status === 'Open' ? 'Close' : 'Open'} Theme</button>
               ` : ''}
             ` : ''}
@@ -154,30 +156,30 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
 
-          // Event listener for toggle status button
-          const toggleStatusButton = widget.node.querySelector('#toggle-status');
-          if (toggleStatusButton) {
-              toggleStatusButton.addEventListener('click', async () => {
-                  try {
-                      const newStatus = themeDetail.Status === 'Open' ? 'Closed' : 'Open';
-                      const response = await fetch(`${forumEndpointUrl}/togglestatus`, {
-                          method: 'PATCH',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({ ThemeID: ThemeID, Status: newStatus }),
-                      });
+        // Event listener for toggle status button
+        const toggleStatusButton = widget.node.querySelector('#toggle-status');
+        if (toggleStatusButton) {
+            toggleStatusButton.addEventListener('click', async () => {
+                try {
+                    const newStatus = themeDetail.Status === 'Open' ? 'Closed' : 'Open';
+                    const response = await fetch(`${forumEndpointUrl}/togglestatus`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ ThemeID: ThemeID, Status: newStatus }),
+                    });
 
-                      if (response.ok) {
-                          ShowThemeDetail(widget, ThemeID, forumEndpointUrl, username); // Refresh the theme detail
-                      } else {
-                          console.error('Failed to toggle status:', response.status);
-                      }
-                  } catch (error) {
-                      console.error('Error toggling status:', error);
-                  }
-              });
-          }
+                    if (response.ok) {
+                        ShowThemeDetail(widget, ThemeID, forumEndpointUrl, username); // Refresh the theme detail
+                    } else {
+                        console.error('Failed to toggle status:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error toggling status:', error);
+                }
+            });
+        }
 
       }
 

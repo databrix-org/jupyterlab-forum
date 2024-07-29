@@ -3,6 +3,11 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
+
+.forumWidget {
+  overflow: auto;
+}
+
 * {
   box-sizing: border-box;
 }
