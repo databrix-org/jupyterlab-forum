@@ -200,19 +200,6 @@ p, li, a {
   margin-top: 20px;
 }
 
-.btn-primary {
-  background-color: #5b81ba;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #4a6592;
-}
-
 .topic {
   background-color: #fff;
   border: 1px solid #e2e2e2;
@@ -421,16 +408,50 @@ p, li, a {
     border-color: #007bff;
 }
 
-.create-theme-button {
-    padding: 8px 15px;
-    background-color: #007bff; /* Blue background */
-    color: #fff; /* White text */
+
+/* General Button Styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition on hover */
+    text-align: center;
+    text-decoration: none;
+    color: white;
 }
 
-.create-theme-button:hover {
-    background-color: #0056b3; /* Slightly darker blue on hover */
+/* Delete Button Styles */
+.btn-danger {
+    background-color: #e74c3c; /* Red color */
+    box-shadow: 0 4px #c0392b;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    box-shadow: 0 4px #96281b;
+}
+
+/* Toggle Button Styles */
+.btn-secondary {
+    background-color: #2ecc71; /* Green color */
+    box-shadow: 0 4px #27ae60;
+}
+
+.btn-secondary:hover {
+    background-color: #27ae60;
+    box-shadow: 0 4px #1e8449;
+}
+
+/* Additional Styles for Primary Button */
+.btn-primary {
+    background-color: #3498db; /* Blue color */
+    box-shadow: 0 4px #2980b9;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px #1f5a8c;
 }

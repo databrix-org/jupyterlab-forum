@@ -7,6 +7,9 @@ export class ForumDashboardWidget extends Widget {
 
     private originalHTML: string; // Declare the property
     private activeTab: string = 'all'; // Track the active tab
+    private currentPage: number = 1; // Track the current page
+    private themesPerPage: number = 5; // Maximum number of themes per page
+    private allThemes: any[] = []; // Store all themes
 
     constructor(private username: string, private forumEndpointUrl: string) {
         super();
@@ -31,6 +34,7 @@ export class ForumDashboardWidget extends Widget {
                   <h1>General Information</h1>
                 </div>
                 <div id="themes-container"></div>
+                <div id="pagination-controls" class="pagination-controls"></div>
               </div>
             </div>
             `;
@@ -54,6 +58,11 @@ export class ForumDashboardWidget extends Widget {
                 const ThemeID = target.getAttribute('data-description-id');
                 event.preventDefault(); // Prevent default link behavior
                 ShowThemeDetail(this, ThemeID, this.forumEndpointUrl, username);
+            }
+
+            if (target.classList.contains('page-link')) { // Page navigation link
+                this.currentPage = parseInt(target.dataset.page ?? '1', 10);
+                this.displayCurrentPageThemes();
             }
         });
     }
@@ -86,44 +95,15 @@ export class ForumDashboardWidget extends Widget {
             }
 
             const data = await response.json();
-            const themes = data.themes;
+            this.allThemes = data.themes;
 
-            const themesContainer = this.node.querySelector('#themes-container');
-            if (themesContainer) {
-                themesContainer.innerHTML = themes.map((theme: any) => `
-                    <div class="subforum-row">
-                        <div class="subforum-description subforum-column">
-                            <h4><a href="#" class="description-link" data-description-id="${theme.ThemeID}">${theme.Title}</a></h4>
-                            <p>Created by ${theme.Author} on ${new Date(theme.CreationTime).toLocaleDateString()}</p>
-                            <p>Status: ${theme.Status}</p>
-                        </div>
-                        <div class="subforum-info subforum-column">
-                            <b><a href="#">Posted</a></b> by <a href="#">${theme.Author}</a>
-                        </div>
-                    </div>
-                    <hr class="subforum-devider">
-                `).join('');
-            }
         } catch (error) {
             console.error('Error fetching themes:', error);
-
-            const themesContainer = this.node.querySelector('#themes-container');
-            if (themesContainer) {
-                themesContainer.innerHTML = exampleThemes.map((theme: any) => `
-                    <div class="subforum-row">
-                        <div class="subforum-description subforum-column">
-                            <h4><a href="#" class="description-link" data-description-id="${theme.ThemeID}">${theme.Title}</a></h4>
-                            <p>Created by ${theme.Author} on ${new Date(theme.CreationTime).toLocaleDateString()}</p>
-                            <p>Status: ${theme.Status}</p>
-                        </div>
-                        <div class="subforum-info subforum-column">
-                            <b><a href="#">Posted</a></b> by <a href="#">${theme.Author}</a>
-                        </div>
-                    </div>
-                    <hr class="subforum-devider">
-                `).join('');
-            }
+            this.allThemes = exampleThemes;
         }
+
+        this.displayCurrentPageThemes();
+        this.updatePaginationControls();
     }
 
     private updateTabDisplay() {
@@ -145,5 +125,44 @@ export class ForumDashboardWidget extends Widget {
         }
       });
     }
+
+
+    private displayCurrentPageThemes() {
+        const themesContainer = this.node.querySelector('#themes-container');
+        if (!themesContainer) return;
+
+        const start = (this.currentPage - 1) * this.themesPerPage;
+        const end = start + this.themesPerPage;
+        const currentThemes = this.allThemes.slice(start, end);
+
+        themesContainer.innerHTML = currentThemes.map((theme: any) => `
+            <div class="subforum-row">
+                <div class="subforum-description subforum-column">
+                    <h4><a href="#" class="description-link" data-description-id="${theme.ThemeID}">${theme.Title}</a></h4>
+                    <p>Created by ${theme.Author} on ${new Date(theme.CreationTime).toLocaleDateString()}</p>
+                    <p>Status: ${theme.Status}</p>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="#">Posted</a></b> by <a href="#">${theme.Author}</a>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+        `).join('');
+    }
+
+    private updatePaginationControls() {
+        const paginationControls = this.node.querySelector('#pagination-controls');
+        if (!paginationControls) return;
+
+        const totalPages = Math.ceil(this.allThemes.length / this.themesPerPage);
+        let paginationHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += `<button class="page-link" data-page="${i}">${i}</button>`;
+        }
+
+        paginationControls.innerHTML = paginationHTML;
+    }
+
 
 }

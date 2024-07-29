@@ -1,6 +1,8 @@
 # Changelog
 
 <!-- <START NEW CHANGELOG ENTRY> -->
+ADD Delete and toggle features
+
 
 ## 0.1.10
 
