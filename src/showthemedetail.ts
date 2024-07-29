@@ -1,4 +1,6 @@
-export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string) {
+import{handleReplyToTheme} from './replytheme';
+
+export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
 
 
     // Example theme data
@@ -48,6 +50,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="replies-container">  </div>
             </div>
 
+            <button id="reply-to-theme" class="btn btn-primary">Reply</button>
             <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
           </div>
         `;
@@ -71,6 +74,13 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             widget.node.innerHTML = widget.originalHTML;
             widget.fetchAndDisplayThemes();
         });
+
+        // Event listener for reply button
+        const replyButton = widget.node.querySelector('#reply-to-theme');
+        replyButton?.addEventListener('click', () => {
+            handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl);
+        });
+
     } catch (error) {
         console.error('Error fetching theme details:', error);
         // Update the widget's HTML to display the theme details
@@ -96,6 +106,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="replies-container">  </div>
             </div>
 
+            <button id="reply-to-theme" class="btn btn-primary">Reply</button>
             <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
           </div>
         `;
@@ -119,6 +130,12 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         backButton?.addEventListener('click', () => {
             widget.node.innerHTML = widget.originalHTML;
             widget.fetchAndDisplayThemes();
+        });
+
+        // Event listener for reply button
+        const replyButton = widget.node.querySelector('#reply-to-theme');
+        replyButton?.addEventListener('click', () => {
+            handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl);
         });
     }
 }

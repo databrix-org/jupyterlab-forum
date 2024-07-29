@@ -53,7 +53,7 @@ export class ForumDashboardWidget extends Widget {
             if (target.classList.contains('description-link')) { // Check if it's the correct link
                 const ThemeID = target.getAttribute('data-description-id');
                 event.preventDefault(); // Prevent default link behavior
-                ShowThemeDetail(this, ThemeID, this.forumEndpointUrl);
+                ShowThemeDetail(this, ThemeID, this.forumEndpointUrl, username);
             }
         });
     }

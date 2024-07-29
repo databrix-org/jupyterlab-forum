@@ -32,7 +32,7 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
 
           try {
             // Send theme data to the server (e.g., using fetch)
-            const response = await fetch(forumEndpointUrl, {
+            const response = await fetch(forumEndpointUrl + "createtheme", {
               method: 'POST',
               body: JSON.stringify(newTheme),
               headers: { 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
               const data = await response.json();
               const newThemeId = data.ThemeID;
 
-              ShowThemeDetail(widget, newThemeId, forumEndpointUrl); // Show the details of the new theme
+              ShowThemeDetail(widget, newThemeId, forumEndpointUrl, username); // Show the details of the new theme
             } else {
               // Handle errors here (e.g., display an error message in the widget)
               console.error('Failed to create theme:', response.status);
