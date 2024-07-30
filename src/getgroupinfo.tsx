@@ -1,4 +1,4 @@
-export async function fetchGroupData(u forumEndpointUrl: string): Promise<string[]> {
+export async function fetchGroupData(forumEndpointUrl: string): Promise<string[]> {
 
     const newPath = '/jupyterhub/hub/api/groups/dozent';
     const url = new URL(forumEndpointUrl);
