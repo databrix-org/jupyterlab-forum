@@ -1,17 +1,24 @@
+import { PageConfig } from '@jupyterlab/coreutils';
 export async function fetchGroupData(forumEndpointUrl: string): Promise<string[]> {
 
     const newPath = '/jupyterhub/hub/api/groups/dozent';
     const url = new URL(forumEndpointUrl);
     url.pathname = newPath;
 
+    const token = PageConfig.getToken();
 
+    if (!token) {
+    throw new Error('API token is not available from PageConfig.');
+    }
+    
     let responseData: any;
 
     try {
         const response = await fetch(url.toString(), {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `token ${token}`
             }
         });
 
