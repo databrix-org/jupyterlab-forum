@@ -1,4 +1,5 @@
 import { ShowThemeDetail } from './showthemedetail';
+import { PageConfig } from '@jupyterlab/coreutils';
 
 export async function handleReplyToTheme(widget: any, username: string, themeId: string, forumEndpointUrl: string) {
   // Temporary HTML for the reply form
@@ -10,7 +11,7 @@ export async function handleReplyToTheme(widget: any, username: string, themeId:
       <button id="submitReplyButton">Send Reply</button>
     </div>
   `;
-
+  const token = PageConfig.getToken();
   widget.node.innerHTML = replyFormHTML; // Update widget's HTML
 
   // Event listener for "Send Reply" button
@@ -31,7 +32,9 @@ export async function handleReplyToTheme(widget: any, username: string, themeId:
         const response = await fetch(forumEndpointUrl + "replytheme", {
           method: 'POST',
           body: JSON.stringify(newReply),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',
+                     'Authorization': `token ${token}`,
+                   },
         });
 
         if (response.ok) {

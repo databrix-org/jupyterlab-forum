@@ -1,7 +1,7 @@
 import { Widget } from '@lumino/widgets';
 import { ShowThemeDetail } from './showthemedetail';
 import { handleCreateThemeClick } from './CreateTheme';
-
+import { PageConfig } from '@jupyterlab/coreutils';
 
 export class ForumDashboardWidget extends Widget {
 
@@ -72,6 +72,7 @@ export class ForumDashboardWidget extends Widget {
 
     private async fetchAndDisplayThemes() {
 
+        const token = PageConfig.getToken();
         // Fallback example themes declared outside of try-catch block
         const exampleThemes = [
             {
@@ -126,7 +127,14 @@ export class ForumDashboardWidget extends Widget {
         ];
 
         try {
-            const response = await fetch(this.forumEndpointUrl);
+            const response = await fetch(this.forumEndpointUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `token ${token}`,
+                },
+            });
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

@@ -10,7 +10,7 @@ export async function fetchGroupData(forumEndpointUrl: string): Promise<string[]
     if (!token) {
     throw new Error('API token is not available from PageConfig.');
     }
-    
+
     let responseData: any;
 
     try {
@@ -18,7 +18,7 @@ export async function fetchGroupData(forumEndpointUrl: string): Promise<string[]
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `token ${token}`
+                'Authorization': `token ${token}`,
             }
         });
 

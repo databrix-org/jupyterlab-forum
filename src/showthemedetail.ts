@@ -1,5 +1,6 @@
 import{handleReplyToTheme} from './replytheme';
 import{fetchGroupData} from './getgroupinfo';
+import { PageConfig } from '@jupyterlab/coreutils';
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
 
@@ -15,6 +16,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
       ]
     };
+    const token = PageConfig.getToken();
 
     try {
 
@@ -24,6 +26,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `token ${token}`,
             },
             body: JSON.stringify({ ThemeID: ThemeID }),
         });

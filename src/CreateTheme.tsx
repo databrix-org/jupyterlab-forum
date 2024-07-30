@@ -1,4 +1,5 @@
 import { ShowThemeDetail } from './showthemedetail';
+import { PageConfig } from '@jupyterlab/coreutils';
 
 export async function handleCreateThemeClick(widget: any, username: string, forumEndpointUrl : string) {
   // Temporary HTML for theme creation form
@@ -21,6 +22,7 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
     submitThemeButton.addEventListener('click', async () => {
           const titleInput = widget.node.querySelector('#themeTitle') as HTMLInputElement;
           const descriptionInput = widget.node.querySelector('#themeDescription') as HTMLTextAreaElement;
+          const token = PageConfig.getToken();
 
           const newTheme = {
             Title: titleInput.value,
@@ -35,7 +37,9 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
             const response = await fetch(forumEndpointUrl + "createtheme", {
               method: 'POST',
               body: JSON.stringify(newTheme),
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json',
+                         'Authorization': `token ${token}`,
+                       },
             });
 
             if (response.ok) {
