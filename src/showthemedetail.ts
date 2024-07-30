@@ -1,5 +1,5 @@
-import{handleReplyToTheme} from './replytheme';
-import{fetchGroupData} from './getgroupinfo';
+import{handleReplyToTheme} from './themedetail/replytheme';
+import{fetchGroupData} from './themedetail/getgroupinfo';
 import { PageConfig } from '@jupyterlab/coreutils';
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
@@ -16,6 +16,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
       ]
     };
+
     const token = PageConfig.getToken();
 
     try {
@@ -73,7 +74,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             replyDiv.className = 'reply';
             replyDiv.innerHTML = `
               <div class="reply-header">
-                <span class="reply-author">${reply.Author}</span> •
+                <span class="reply-author">${reply.Author}</span>
                 <span class="reply-date">${new Date(reply.CreationTime).toLocaleDateString()}</span>
               </div>
               <div class="reply-content">${reply.Content}</div>
@@ -91,6 +92,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
                           method: 'PATCH',
                           headers: {
                               'Content-Type': 'application/json',
+                              'Authorization': `token ${token}`,
                           },
                           body: JSON.stringify({ ThemeID: ThemeID, Status: newStatus }),
                       });
@@ -109,7 +111,6 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
 
     } catch (error) {
         console.error('Error fetching theme details:', error);
-
         const themeDetail = exampleTheme;
         // Update the widget's HTML to display the theme details
         widget.node.innerHTML = `
@@ -183,7 +184,6 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
                 }
             });
         }
-
       }
 
     const backButton = widget.node.querySelector('#back-to-forum');
@@ -208,6 +208,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `token ${token}`,
                     },
                     body: JSON.stringify({ ThemeID: ThemeID }),
                 });

@@ -1,4 +1,4 @@
-import { ShowThemeDetail } from './showthemedetail';
+import { ShowThemeDetail } from '../showthemedetail';
 import { PageConfig } from '@jupyterlab/coreutils';
 
 export async function handleReplyToTheme(widget: any, username: string, themeId: string, forumEndpointUrl: string) {
