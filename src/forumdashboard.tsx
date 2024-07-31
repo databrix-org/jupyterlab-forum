@@ -22,11 +22,14 @@ export class ForumDashboardWidget extends Widget {
             <div class="subforum">
               <div class="subforum-title">
                 <h2>Current Themes </h2>
+                <div class="tabs">
+                  <div class="tab-group">
+                    <button class="tab" data-tab="All">All</button>
+                    <button class="tab" data-tab="Open">Open</button>
+                    <button class="tab" data-tab="Closed">Closed</button>
+                  </div>
+                </div>
 
-                <button class="tab" data-tab="All">All</button>
-                <button class="tab" data-tab="Open">Open</button>
-                <button class="tab" data-tab="Closed">Closed</button>
-                
                 <div class="search-container">
                   <input type="text" id="searchBox" placeholder="Search themes...">
                 </div>

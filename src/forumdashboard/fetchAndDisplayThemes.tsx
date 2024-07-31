@@ -31,49 +31,63 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Title: "Example Theme 1",
              Author: "Admin",
              CreationTime: "2024-07-01T10:00:00",
-             Status: "Open"
+             Status: "Open",
+             Sticky: true,
+             Commentable : false
            },
            {
              ThemeID: 2,
              Title: "Example Theme 2",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
            {
              ThemeID: 3,
              Title: "Example Theme 3",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
            {
              ThemeID: 4,
              Title: "Example Theme 4",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
            {
              ThemeID: 5,
              Title: "Example Theme 5",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
            {
              ThemeID: 6,
              Title: "Example Theme 6",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
            {
              ThemeID: 7,
              Title: "Example Theme 7",
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
-             Status: "Closed"
+             Status: "Closed",
+             Sticky: false,
+             Commentable : true
            },
 
         ];

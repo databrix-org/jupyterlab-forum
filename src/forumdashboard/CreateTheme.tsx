@@ -46,7 +46,9 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
             Title: titleInput.value,
             Description: descriptionInput,
             Author: username,
-            Status: "Open"
+            Status: "Open",
+            Sticky: false,
+            Commentable : true
             // Add other relevant fields (e.g., Author, CreationTime)
           };
 

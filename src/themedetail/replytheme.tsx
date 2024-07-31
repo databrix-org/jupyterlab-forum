@@ -1,27 +1,18 @@
 import { ShowThemeDetail } from '../showthemedetail';
 import { PageConfig } from '@jupyterlab/coreutils';
 
-export async function handleReplyToTheme(widget: any, username: string, themeId: string, forumEndpointUrl: string) {
+export async function handleReplyToTheme(widget: any, username: string, themeId: string, forumEndpointUrl: string, replytext: any) {
+
   // Temporary HTML for the reply form
-  const replyFormHTML = `
-    <h2>Reply to Theme</h2>
-    <div class="reply-form">
-      <label for="replyContent">Your Reply:</label>
-      <textarea id="replyContent" name="replyContent"></textarea><br><br>
-      <button id="submitReplyButton">Send Reply</button>
-    </div>
-  `;
   const token = PageConfig.getToken();
-  widget.node.innerHTML = replyFormHTML; // Update widget's HTML
 
   // Event listener for "Send Reply" button
   const submitReplyButton = widget.node.querySelector('#submitReplyButton');
   if (submitReplyButton) {
     submitReplyButton.addEventListener('click', async () => {
-      const replyContentInput = widget.node.querySelector('#replyContent') as HTMLTextAreaElement;
 
       const newReply = {
-        Content: replyContentInput.value,
+        Content: replytext,
         Author: username,
         ThemeID: themeId,
         // Add other relevant fields if necessary
