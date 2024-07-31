@@ -57,11 +57,15 @@
     },
     "dependencies": {
         "@jupyterlab/application": "^4.2.4",
-        "@jupyterlab/apputils": "^4.3.4"
+        "@jupyterlab/apputils": "^4.3.4",
+        "@jupyterlab/services": "^7.2.4",
+        "quill": "^2.0.2",
+        "react": "^18.3.1",
+        "webpack": "^5.93.0"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
-        "@jupyterlab/testutils": "^4.0.0",
+        "@jupyterlab/testutils": "^4.2.4",
         "@types/jest": "^29.2.0",
         "@types/json-schema": "^7.0.11",
         "@types/react": "^18.0.26",
@@ -83,7 +87,7 @@
         "stylelint-config-standard": "^34.0.0",
         "stylelint-csstree-validator": "^3.0.0",
         "stylelint-prettier": "^4.0.0",
-        "typescript": "~5.0.2",
+        "typescript": "^5.5.4",
         "yjs": "^13.5.0"
     },
     "sideEffects": [

@@ -1,6 +1,7 @@
 import{handleReplyToTheme} from './themedetail/replytheme';
 import{fetchGroupData} from './themedetail/getgroupinfo';
 import { PageConfig } from '@jupyterlab/coreutils';
+import {fetchAndDisplayThemes} from './forumdashboard/fetchAndDisplayThemes';
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
 
@@ -189,7 +190,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
     const backButton = widget.node.querySelector('#back-to-forum');
     backButton?.addEventListener('click', () => {
         widget.node.innerHTML = widget.originalHTML;
-        widget.fetchAndDisplayThemes();
+        fetchAndDisplayThemes(widget, forumEndpointUrl);
     });
 
     // Event listener for reply button

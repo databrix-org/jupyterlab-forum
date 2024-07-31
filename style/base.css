@@ -35,6 +35,12 @@ h1 {
   padding: 20px;
 }
 
+.actions-container {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  margin-left: auto; /* Push the button to the right */
+}
+
 .subforum {
   margin-top: 20px;
 }
@@ -44,6 +50,36 @@ h1 {
   padding: 5px;
   border-radius: 5px;
   margin: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  margin-left: 30px; /* Add some space between tabs and title */
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: black; /* Change font color to black */
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 30px; /* Add some space between tabs and title */
+}
+
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tab.active {
+  border-bottom: 2px solid white;
+}
+
+.subforum-title h2 {
+  color: white;
+  margin: 0;
 }
 
 .subforum-row {
@@ -75,41 +111,42 @@ h1 {
 /* For the smartphones */
 @media screen and (max-width: 460px) {
   .container {
-      margin: 10px;
-      padding: 10px;
+    margin: 10px;
+    padding: 10px;
   }
 
   .subforum-row {
-      grid-template-columns: 25% 75%;
+    grid-template-columns: 25% 75%;
   }
 
   .subforum-devider {
-      display: block;
-      border: 0;
-      height: 1px;
-      background-image: linear-gradient(to right, rgba(190, 190, 190, 0), rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
+    display: block;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(190, 190, 190, 0), rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
   }
 }
 
 /* For the tablets */
 @media screen and (min-width: 460px) and (max-width: 1024px) {
   .container {
-      margin: 15px;
-      padding: 15px;
+    margin: 15px;
+    padding: 15px;
   }
 
   .subforum-row {
-      grid-template-columns: 80% 20%;
+    grid-template-columns: 80% 20%;
   }
 
   html {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   h1 {
-      font-size: 16px;
+    font-size: 16px;
   }
 }
+
 .navbar {
   display: flex;
   align-items: center; /* Vertically align items */
@@ -127,11 +164,6 @@ h1 {
 body {
   line-height: 1.6; /* Improve readability with better line spacing */
   background-color: #f4f4f4; /* Subtle background color */
-}
-
-.subforum-title h1 { /* Style the h1 within the subforum title */
-  color: white;
-  margin: 0;
 }
 
 /* Typography */
@@ -171,7 +203,65 @@ p, li, a {
   text-decoration: underline; /* Underline on hover */
 }
 
+.create-theme-button {
+  background-color: #209e81;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
 
+.create-theme-button strong {
+  margin-right: 5px;
+}
+
+.create-theme-button:hover {
+  background-color: #3a5a8b;
+}
+
+.create-theme-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.quill-editor {
+  height: 400px; /* Adjust height as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ql-toolbar {
+  border-radius: 5px 5px 0 0;
+}
+
+.ql-container {
+  border-radius: 0 0 5px 5px;
+}
 
 /* Topic Detail Styling */
 .topic-widget {

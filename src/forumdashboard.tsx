@@ -18,28 +18,27 @@ export class ForumDashboardWidget extends Widget {
         super();
         this.addClass('forumWidget');
         this.originalHTML = `
-            <header>
-                <!--NavBar Section-->
-                <div class = "navbar">
-                    <div class="forum-title">Databrix Lab Forum</div>
-                </div>
-            </header>
-            <div class="container">
-              <div class="tabs">
+
+            <div class="subforum">
+              <div class="subforum-title">
+                <h2>Current Themes </h2>
+
                 <button class="tab" data-tab="All">All</button>
                 <button class="tab" data-tab="Open">Open</button>
                 <button class="tab" data-tab="Closed">Closed</button>
-              </div>
-              <button class="create-theme-button" id="createThemeButton">Create Theme</button>
-            </div>
-              <div class="subforum">
-                <div class="subforum-title">
-                  <h2>General Information</h2>
+                
+                <div class="search-container">
+                  <input type="text" id="searchBox" placeholder="Search themes...">
                 </div>
-                <div id="themes-container"></div>
-                <div id="pagination-controls" class="pagination-controls"></div>
+
+                <div class="actions-container">
+                  <button class="create-theme-button" id="createThemeButton"><strong>+</strong> New Theme</button>
+                </div>
               </div>
+              <div id="themes-container"></div>
+              <div id="pagination-controls" class="pagination-controls"></div>
             </div>
+
             `;
         this.node.innerHTML = this.originalHTML; // Set initial HTML
 
