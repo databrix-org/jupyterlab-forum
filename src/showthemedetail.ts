@@ -6,26 +6,11 @@ import {initializeQuill} from './forumdashboard/initializeQuill'
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
 
-    // Example theme data
-    const exampleTheme = {
-      Title: "Example Theme",
-      Description: "This is an example theme description.",
-      Author: "User123",
-      CreationTime: "2024-07-24T10:08",
-      Status: "Open",
-      Sticky: true,
-      Commentable : false,
-      Replies: [
-        { Author: "Example Author2", Content: "This is an example reply to the theme2.", CreationTime: "2024-07-22T10:08" },
-        { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
-      ]
-    };
-
     const token = PageConfig.getToken();
 
     try {
-
         const grouplist = await fetchGroupData( forumEndpointUrl)
+
         // Make a POST request to retrieve the theme details
         const response = await fetch(forumEndpointUrl, {
             method: 'POST',
@@ -37,6 +22,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         });
 
         const themeDetail = await response.json();
+        
         // Update the widget's HTML to display the theme details
         widget.node.innerHTML = `
           <div class="topic">
@@ -91,7 +77,16 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
 
-          const quill = initializeQuill(widget)
+
+          if (themeDetail.Commentable === true) {
+              const quill = initializeQuill(widget);
+              // Event listener for reply button
+              const replyButton = widget.node.querySelector('#reply-to-theme');
+              replyButton?.addEventListener('click', () => {
+                  handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
+              });
+          }
+
 
           // Event listener for toggle status button
           const toggleStatusButton = widget.node.querySelector('#toggle-status');
@@ -123,12 +118,6 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
           backButton?.addEventListener('click', () => {
               widget.node.innerHTML = widget.originalHTML;
               fetchAndDisplayThemes(widget, forumEndpointUrl);
-          });
-
-          // Event listener for reply button
-          const replyButton = widget.node.querySelector('#reply-to-theme');
-          replyButton?.addEventListener('click', () => {
-              handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
           });
 
 
@@ -166,7 +155,21 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
 
     } catch (error) {
         console.error('Error fetching theme details:', error);
-        const themeDetail = exampleTheme;
+        // Example theme data
+        const themeDetail = {
+          Title: "Example Theme",
+          Description: "This is an example theme description.",
+          Author: "User123",
+          CreationTime: "2024-07-24T10:08",
+          Status: "Open",
+          Sticky: false,
+          Commentable : true,
+          Replies: [
+            { Author: "Example Author2", Content: "This is an example reply to the theme2.", CreationTime: "2024-07-22T10:08" },
+            { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
+          ]
+        };
+
         // Update the widget's HTML to display the theme details
         widget.node.innerHTML = `
           <div class="topic">
@@ -230,6 +233,15 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             `;
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
+
+          if (themeDetail.Commentable === true) {
+              const quill = initializeQuill(widget);
+              // Event listener for reply button
+              const replyButton = widget.node.querySelector('#reply-to-theme');
+              replyButton?.addEventListener('click', () => {
+                  handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
+              });
+          }
 
         // Event listener for toggle status button
         const toggleStatusButton = widget.node.querySelector('#toggle-status');
