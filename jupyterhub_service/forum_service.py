@@ -227,7 +227,7 @@ class DeleteThemeHandler(HubAuthenticated, RequestHandler):
     def initialize(self):
       self.db_path = '/opt/forum-database/forumbase.db'
     def write_to_json(self, doc):
-        """Write dictionary document as JSON"""
+
         self.set_header("Content-Type", "application/json; charset=UTF-8")
         self.write(escape.utf8(json.dumps(doc)))
     @authenticated
