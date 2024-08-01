@@ -32,8 +32,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "Admin",
              CreationTime: "2024-07-01T10:00:00",
              Status: "Open",
-             Sticky: true,
-             Commentable : false
+             Sticky: 1,
+             Commentable : 0
            },
            {
              ThemeID: 2,
@@ -41,8 +41,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
            {
              ThemeID: 3,
@@ -50,8 +50,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
            {
              ThemeID: 4,
@@ -59,8 +59,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
            {
              ThemeID: 5,
@@ -68,8 +68,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
            {
              ThemeID: 6,
@@ -77,8 +77,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
            {
              ThemeID: 7,
@@ -86,8 +86,8 @@ export async function fetchAndDisplayThemes(widget: any, forumEndpointUrl: strin
              Author: "User123",
              CreationTime: "2024-07-15T15:30:00",
              Status: "Closed",
-             Sticky: false,
-             Commentable : true
+             Sticky: 0,
+             Commentable : 1
            },
 
         ];

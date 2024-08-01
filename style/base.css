@@ -289,11 +289,11 @@ label {
 
 /* Customize Quill heading sizes */
 .ql-editor h1 {
-  font-size: 1.5em; /* Adjust as needed */
+  font-size: 1.25em; /* Adjust as needed */
 }
 
 .ql-editor h2 {
-  font-size: 1.25em; /* Adjust as needed */
+  font-size: 1.18em; /* Adjust as needed */
 }
 
 .ql-editor h3 {

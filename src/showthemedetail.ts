@@ -22,7 +22,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         });
 
         const themeDetail = await response.json();
-        
+
         // Update the widget's HTML to display the theme details
         widget.node.innerHTML = `
           <div class="topic">
@@ -162,8 +162,8 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
           Author: "User123",
           CreationTime: "2024-07-24T10:08",
           Status: "Open",
-          Sticky: false,
-          Commentable : true,
+          Sticky: 0,
+          Commentable : 1,
           Replies: [
             { Author: "Example Author2", Content: "This is an example reply to the theme2.", CreationTime: "2024-07-22T10:08" },
             { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
@@ -234,7 +234,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
 
-          if (themeDetail.Commentable === true) {
+          if (themeDetail.Commentable === 1) {
               const quill = initializeQuill(widget);
               // Event listener for reply button
               const replyButton = widget.node.querySelector('#reply-to-theme');

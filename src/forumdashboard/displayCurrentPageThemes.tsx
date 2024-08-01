@@ -3,8 +3,8 @@ export function displayCurrentPageThemes(widget:any, currentPage: number, themes
     if (!themesContainer) return;
 
     // Separate sticky and non-sticky themes
-    const stickyThemes = showThemes.filter(theme => theme.Sticky);
-    const nonStickyThemes = showThemes.filter(theme => !theme.Sticky);
+    const stickyThemes = showThemes.filter(theme => theme.Sticky === 1);
+    const nonStickyThemes = showThemes.filter(theme => theme.Sticky === 0);
 
     // Sort both lists by creation time (newest first)
     stickyThemes.sort((b, a) => new Date(b.CreationTime).getTime() - new Date(a.CreationTime).getTime());
