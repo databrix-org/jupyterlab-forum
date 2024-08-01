@@ -2,7 +2,9 @@ import{handleReplyToTheme} from './themedetail/replytheme';
 import{fetchGroupData} from './themedetail/getgroupinfo';
 import { PageConfig } from '@jupyterlab/coreutils';
 import {fetchAndDisplayThemes} from './forumdashboard/fetchAndDisplayThemes';
-import {initializeQuill} from './forumdashboard/initializeQuill'
+import {initializeQuill} from './forumdashboard/initializeQuill';
+import {deletetheme} from './themedetail/deletetheme';
+import {toggletheme} from './themedetail/toggletheme';
 
 export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUrl: string, username: string) {
 
@@ -50,9 +52,10 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="form-group">
                 <label for="themeDescription">Your Reply:</label>
                 <div id="themeDescription" name="quill-editor"></div>
-                <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
+                  <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
               </div>
             ` : ''}
+
 
             <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
             ${(username === themeDetail.Author || grouplist.includes(username)) && !themeDetail.Sticky ? `
@@ -78,79 +81,38 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
           });
 
 
-          if (themeDetail.Commentable === true) {
-              const quill = initializeQuill(widget);
-              // Event listener for reply button
-              const replyButton = widget.node.querySelector('#reply-to-theme');
-              replyButton?.addEventListener('click', () => {
-                  handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
-              });
-          }
 
-
-          // Event listener for toggle status button
-          const toggleStatusButton = widget.node.querySelector('#toggle-status');
-          if (toggleStatusButton) {
-              toggleStatusButton.addEventListener('click', async () => {
-                  try {
-                      const newStatus = themeDetail.Status === 'Open' ? 'Closed' : 'Open';
-                      const response = await fetch(`${forumEndpointUrl}/togglestatus`, {
-                          method: 'PATCH',
-                          headers: {
-                              'Content-Type': 'application/json',
-                              'Authorization': `token ${token}`,
-                          },
-                          body: JSON.stringify({ ThemeID: ThemeID, Status: newStatus }),
-                      });
-
-                      if (response.ok) {
-                          ShowThemeDetail(widget, ThemeID, forumEndpointUrl, username); // Refresh the theme detail
-                      } else {
-                          console.error('Failed to toggle status:', response.status);
-                      }
-                  } catch (error) {
-                      console.error('Error toggling status:', error);
-                  }
-              });
-          }
-
-          const backButton = widget.node.querySelector('#back-to-forum');
-          backButton?.addEventListener('click', () => {
-              widget.node.innerHTML = widget.originalHTML;
-              fetchAndDisplayThemes(widget, forumEndpointUrl);
+        if (themeDetail.Commentable === true) {
+          const quill = initializeQuill(widget);
+          // Event listener for reply button
+          const replyButton = widget.node.querySelector('#reply-to-theme');
+          replyButton?.addEventListener('click', () => {
+              handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
           });
+        }
+
+        // Event listener for toggle status button
+        const toggleStatusButton = widget.node.querySelector('#toggle-status');
+        if (toggleStatusButton) {
+            toggleStatusButton.addEventListener('click', async () => {
+              toggletheme(widget, username, ThemeID, themeDetail.Status ,forumEndpointUrl,token)
+            });
+        }
+
+        const backButton = widget.node.querySelector('#back-to-forum');
+        backButton?.addEventListener('click', () => {
+            widget.node.innerHTML = widget.originalHTML;
+            fetchAndDisplayThemes(widget, forumEndpointUrl);
+        });
 
 
-          // Event listener for delete button
-          const deleteButton = widget.node.querySelector('#delete-theme');
-          if (deleteButton) {
-              deleteButton.addEventListener('click', async () => {
-                const userConfirmed = window.confirm("Are you sure you want to delete this theme?");
-                if (!userConfirmed) {
-                  return; // User cancelled the deletion
-                }
-
-                  try {
-                      const response = await fetch(`${forumEndpointUrl}/deletetheme`, {
-                          method: 'DELETE',
-                          headers: {
-                              'Content-Type': 'application/json',
-                              'Authorization': `token ${token}`,
-                          },
-                          body: JSON.stringify({ ThemeID: ThemeID }),
-                      });
-
-                      if (response.ok) {
-                          widget.node.innerHTML = widget.originalHTML;
-                          fetchAndDisplayThemes(widget, forumEndpointUrl);
-                      } else {
-                          console.error('Failed to delete theme:', response.status);
-                      }
-                  } catch (error) {
-                      console.error('Error deleting theme:', error);
-                  }
-              });
-          }
+        // Event listener for delete button
+        const deleteButton = widget.node.querySelector('#delete-theme');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', async () => {
+              deletetheme(widget, ThemeID, forumEndpointUrl,token)
+            });
+        }
 
 
     } catch (error) {
@@ -162,8 +124,8 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
           Author: "User123",
           CreationTime: "2024-07-24T10:08",
           Status: "Open",
-          Sticky: 0,
-          Commentable : 1,
+          Sticky: false,
+          Commentable : true,
           Replies: [
             { Author: "Example Author2", Content: "This is an example reply to the theme2.", CreationTime: "2024-07-22T10:08" },
             { Author: "Example Author", Content: "This is an example reply to the theme.", CreationTime: "2024-07-24T10:08" },
@@ -193,11 +155,11 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="replies-container">  </div>
             </div>
 
-            ${(themeDetail.Commentable ) ? `
+            ${(themeDetail.Commentable) ? `
               <div class="form-group">
                 <label for="themeDescription">Your Reply:</label>
                 <div id="themeDescription" name="quill-editor"></div>
-                <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
+                  <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
               </div>
             ` : ''}
 
@@ -234,37 +196,22 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
             repliesContainer?.appendChild(replyDiv); // Add the reply div to the container
           });
 
-          if (themeDetail.Commentable === 1) {
-              const quill = initializeQuill(widget);
-              // Event listener for reply button
-              const replyButton = widget.node.querySelector('#reply-to-theme');
-              replyButton?.addEventListener('click', () => {
-                  handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
-              });
-          }
+
+        if (themeDetail.Commentable === true) {
+          const quill = initializeQuill(widget);
+          // Event listener for reply button
+          const replyButton = widget.node.querySelector('#reply-to-theme');
+          replyButton?.addEventListener('click', () => {
+              handleReplyToTheme(widget, username, ThemeID, forumEndpointUrl, quill.root.innerHTML);
+          });
+        }
+
 
         // Event listener for toggle status button
         const toggleStatusButton = widget.node.querySelector('#toggle-status');
         if (toggleStatusButton) {
             toggleStatusButton.addEventListener('click', async () => {
-                try {
-                    const newStatus = themeDetail.Status === 'Open' ? 'Closed' : 'Open';
-                    const response = await fetch(`${forumEndpointUrl}/togglestatus`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ ThemeID: ThemeID, Status: newStatus }),
-                    });
-
-                    if (response.ok) {
-                        ShowThemeDetail(widget, ThemeID, forumEndpointUrl, username); // Refresh the theme detail
-                    } else {
-                        console.error('Failed to toggle status:', response.status);
-                    }
-                } catch (error) {
-                    console.error('Error toggling status:', error);
-                }
+              toggletheme(widget, username, ThemeID, themeDetail.Status ,forumEndpointUrl,token)
             });
         }
 
@@ -273,33 +220,9 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
         const deleteButton = widget.node.querySelector('#delete-theme');
         if (deleteButton) {
             deleteButton.addEventListener('click', async () => {
-              const userConfirmed = window.confirm("Are you sure you want to delete this theme?");
-              if (!userConfirmed) {
-                return; // User cancelled the deletion
-              }
-
-                try {
-                    const response = await fetch(`${forumEndpointUrl}/deletetheme`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `token ${token}`,
-                        },
-                        body: JSON.stringify({ ThemeID: ThemeID }),
-                    });
-
-                    if (response.ok) {
-                        widget.node.innerHTML = widget.originalHTML;
-                        fetchAndDisplayThemes(widget, forumEndpointUrl);
-                    } else {
-                        console.error('Failed to delete theme:', response.status);
-                    }
-                } catch (error) {
-                    console.error('Error deleting theme:', error);
-                }
+              deletetheme(widget, ThemeID, forumEndpointUrl,token)
             });
         }
-
 
       }
 
