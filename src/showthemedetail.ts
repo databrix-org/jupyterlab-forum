@@ -82,7 +82,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
 
 
 
-        if (themeDetail.Commentable === true) {
+        if (themeDetail.Commentable) {
           const quill = initializeQuill(widget);
           // Event listener for reply button
           const replyButton = widget.node.querySelector('#reply-to-theme');
@@ -197,7 +197,7 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
           });
 
 
-        if (themeDetail.Commentable === true) {
+        if (themeDetail.Commentable) {
           const quill = initializeQuill(widget);
           // Event listener for reply button
           const replyButton = widget.node.querySelector('#reply-to-theme');
