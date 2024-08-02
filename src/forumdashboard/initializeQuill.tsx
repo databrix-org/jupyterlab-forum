@@ -1,5 +1,6 @@
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
+import '../../style/custom-quill.css'
 
 export function initializeQuill(widget: any): Quill {
     const quill = new Quill('#themeDescription', {
