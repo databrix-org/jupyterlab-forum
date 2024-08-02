@@ -17,10 +17,10 @@ export async function handleCreateThemeClick(widget: any, username: string, foru
       <label for="themeDescription">Description:</label>
       <div id="themeDescription" name="quill-editor"></div>
     </div>
-    <button id="submitThemeButton" class="btn btn-secondary"">
+    <button id="submitThemeButton" class="forum-btn forum-btn-secondary"">
       <strong>+</strong> Create Theme
     </button>
-    <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
+    <button id="back-to-forum" class="forum-btn forum-btn-primary">Back to Forum</button>
   </div>
   `;
 

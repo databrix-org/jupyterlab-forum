@@ -52,15 +52,15 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="form-group">
                 <label for="themeDescription">Your Reply:</label>
                 <div id="themeDescription" name="quill-editor"></div>
-                  <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
+                  <button id="reply-to-theme" class="forum-btn forum-btn-reply">Commit Reply</button>
               </div>
             ` : ''}
 
 
-            <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
+            <button id="back-to-forum" class="forum-btn forum-btn-primary">Back to Forum</button>
             ${(username === themeDetail.Author || grouplist.includes(username)) && !themeDetail.Sticky ? `
-              <button id="toggle-status" class="btn btn-secondary">${themeDetail.Status === 'Open' ? 'Close' : 'Open'} Theme</button>
-              <button id="delete-theme" class="btn btn-danger">Delete Theme</button>
+              <button id="toggle-status" class="forum-btn forum-btn-secondary">${themeDetail.Status === 'Open' ? 'Close' : 'Open'} Theme</button>
+              <button id="delete-theme" class="forum-btn forum-btn-danger">Delete Theme</button>
             ` : ''}
           </div>
         `;
@@ -159,16 +159,16 @@ export async function ShowThemeDetail(widget: any, ThemeID: any, forumEndpointUr
               <div class="form-group">
                 <label for="themeDescription">Your Reply:</label>
                 <div id="themeDescription" name="quill-editor"></div>
-                  <button id="reply-to-theme" class="btn btn-reply">Commit Reply</button>
+                  <button id="reply-to-theme" class="forum-btn forum-btn-reply">Commit Reply</button>
               </div>
             ` : ''}
 
-            <button id="back-to-forum" class="btn btn-primary">Back to Forum</button>
+            <button id="back-to-forum" class="forum-btn forum-btn-primary">Back to Forum</button>
 
 
             ${(!themeDetail.Sticky) ? `
-              <button id="delete-theme" class="btn btn-danger">Delete Theme</button>
-              <button id="toggle-status" class="btn btn-secondary">${themeDetail.Status === 'Open' ? 'Close' : 'Open'} Theme</button>
+              <button id="delete-theme" class="forum-btn forum-btn-danger">Delete Theme</button>
+              <button id="toggle-status" class="forum-btn forum-btn-secondary">${themeDetail.Status === 'Open' ? 'Close' : 'Open'} Theme</button>
             ` : ''}
 
           </div>

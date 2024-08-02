@@ -8,33 +8,6 @@
   overflow: auto;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 14px;
-  font-family: 'Titillium Web', sans-serif;
-  background-color: rgb(255, 255, 255);
-  color: #000000;
-}
-
-a {
-  color: #FF0042;
-  font-weight: bolder;
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 16px;
-  font-weight: bolder;
-}
-
-.container {
-  margin: 20px;
-  padding: 20px;
-}
-
 .actions-container {
   display: flex;
   justify-content: flex-end; /* Align items to the right */
@@ -104,26 +77,6 @@ h1 {
   }
 }
 
-/* For the tablets */
-@media screen and (min-width: 460px) and (max-width: 1024px) {
-  .container {
-    margin: 15px;
-    padding: 15px;
-  }
-
-  .subforum-row {
-    grid-template-columns: 80% 20%;
-  }
-
-  html {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 16px;
-  }
-}
-
 .navbar {
   display: flex;
   align-items: center; /* Vertically align items */
@@ -137,21 +90,6 @@ h1 {
   background-color: #f0f0f0; /* Light gray background */
   border-radius: 5px; /* Slightly rounded corners */
 }
-
-body {
-  line-height: 1.6; /* Improve readability with better line spacing */
-  background-color: #f4f4f4; /* Subtle background color */
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Arial', sans-serif; /* Consistent heading font */
-}
-
-p, li, a {
-  font-family: 'Helvetica Neue', sans-serif; /* Consistent body font */
-}
-
 
 /* Subforum Row Enhancements */
 
@@ -532,7 +470,7 @@ label {
 }
 
 /* General Button Styles */
-.btn {
+.forum-btn {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px 5px;
@@ -546,41 +484,41 @@ label {
 }
 
 /* Delete Button Styles */
-.btn-danger {
+.forum-btn-danger {
     background-color: #e74c3c; /* Red color */
     box-shadow: 0 4px #c0392b;
 }
 
-.btn-danger:hover {
+.forum-btn-danger:hover {
     background-color: #c0392b;
     box-shadow: 0 4px #96281b;
 }
 
 /* Toggle Button Styles */
-.btn-secondary {
+.forum-btn-secondary {
     background-color: #2ecc71; /* Green color */
     box-shadow: 0 4px #27ae60;
 }
 
-.btn-secondary:hover {
+.forum-btn-secondary:hover {
     background-color: #27ae60;
     box-shadow: 0 4px #1e8449;
 }
 
 /* Additional Styles for Primary Button */
-.btn-primary {
+.forum-btn-primary {
     background-color: #3498db; /* Blue color */
     box-shadow: 0 4px #2980b9;
 }
 
-.btn-primary:hover {
+.forum-btn-primary:hover {
     background-color: #2980b9;
     box-shadow: 0 4px #1f5a8c;
 }
 
 
 /* Commit reply Button Styles */
-.btn-reply {
+.forum-btn-reply {
     background-color: #b6bab8; /* Green color */
     box-shadow: 0 4px #8e9190;
     align-self: flex-end; /* Align the button to the right */
@@ -592,7 +530,7 @@ label {
     cursor: pointer;
 }
 
-.btn-reply:hover {
+.forum-btn-reply:hover {
     background-color: #8e9190;
     box-shadow: 0 4px #1e8449;
 }
